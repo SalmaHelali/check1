@@ -1,0 +1,95 @@
+ALGORITHM sum_arr_disctinct
+//Problem,solution 1.
+VAR
+    arr1 : ARRAY_OF INTEGER [];
+    arr2 : ARRAY_OF INTEGER[];
+    n,m,i,j,sum1,sum2,sum: INTEGER:= 0;
+BEGIN
+    REPEAT
+        read(n,m);
+
+    FOR i FROM 1 TO n STEP 1  DO
+        read (arr1[i])
+    END_FOR
+
+    FOR j FROM 1 TO m STEP 1  DO
+        read (arr2[j])
+    END_FOR
+
+    FOR i FROM 0 TO n-1 STEP 1 DO
+        FOR j FROM 0 TO m-1 STEP 1  DO
+            IF (arr1[i]<>arr2[j]) THEN
+                sum1:=sum1+arr1[i]
+            END_IF
+        END_FOR
+    END_FOR
+
+    FOR j FROM 0 TO m-1 STEP 1  DO
+        FOR i FROM 0 TO n-1 STEP 1 DO
+            IF (arr2[j]<>arr1[i]) THEN
+                sum2:=sum2+arr2[j]
+            END_IF
+        END_FOR
+    END_FOR
+
+    sum:=sum1+sum2;
+
+    write ("the sum of distinct elements in both arrays: ", sum);
+END 
+//Problem,solution2.
+ALGORITHM sum_hashtable_disctinct
+VAR
+    i,j : INTEGER:=0 ; 
+    arr1: ARRAY_OF INTEGER [];
+    arr2: ARRAY_OF INTEGER []; 
+    htab :  HASH_TABLE<INTEGER,INTEGER> ; 
+    key : INTEGER ;
+    count : INTEGER ; 
+    sum1,sum2,sum,m,n :INTEGER:=0 ;
+
+BEGIN
+
+FOR i FROM 0 TO arr1.length STEP 1 DO
+    read (arra[i]) ;
+END_FOR
+FOR i FROM 0 TO arr2 STEP 1  DO
+    read(arr2[i]);
+END_FOR
+
+
+FOR i FROM 0 TO arr1.length STEP step  DO
+key :=arr1[i]
+IF (htab.lookup(key)) THEN
+    count :=htab.get(key)+1 ;
+    htab.insert(key.count);
+   
+ELSE
+     htab.insert(key,1) ;
+END_IF
+END_FOR
+
+FOR i FROM 0 TO arr2.length STEP step  DO
+    key := arr2[i];
+    IF (htab.lookup(key)) THEN
+        count :=htab.get(key)+1 ;
+        htab.insert(key,count);
+        ELSE 
+        htab.insert(key,2)
+    END_IF
+END_FOR
+
+FOR i FROM 0 TO n-1 STEP 1  DO
+    IF (htab.get(arr1[i]=1)) THEN
+        sum1:=sum1+arr1[i] ;
+    END_IF
+END_FOR
+FOR i FROM 0 TO m-1 STEP 1  DO
+    IF (htab.get(arr2[i]=1)) THEN
+        sum2 :=sum2+arr2[i] ;
+    END_IF
+END_FOR
+sum :=sum1+sum2;
+write ("sum of distinct elements",sum) ;
+
+END
+
